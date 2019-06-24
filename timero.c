@@ -17,7 +17,7 @@ int main(){
 			x++;
 		}
 	}
-	//temporiza a solucao em segundos(NOTA: descobrir como temporizar milisegundos tambem)
+	//temporiza a solucao em segundos(NOTA: adicionar milisegundos)
 	printf("\naperte enter para comecar");
 	getchar();
 	start = time(NULL);
