@@ -1,29 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int main(){
-	
-	int x;
+
+#define LONG 25 /* Tamanho do algoritimo */
+
+/*
+ * Este programa mostra um algoritimo que não se repete, evita algoritimos fracos
+ * (Ex.: L, R, L', R', etc.), e também mede o tempo de solução.
+ * 
+ * TODO: adicionar milésimos de segundo; guardar tempos, calcular médias, etc; 
+ * Adicionar o resultado visual do cubo.
+ */
+
+int main()
+{	
+	int x, num;
 	time_t start,stop;
-	//gera o algoritimo
-	char anterior, escolhido, Lista[6] = {'B','D','U','F','L','R'}, Modificadores[3] = {'`','2',' '};
+	char anterior, escolhido, 
+		lista[6] = {'D','B','L','U','F','R'}, 
+		modificadores[3] = {'`','2',' '};
+
+	/* gera o algoritimo */
 	srand(time(NULL));
-	x = 0;
-	while(x <= 25){
+	for( x = 0 ; x <= LONG ; ) {
 		anterior = escolhido;
-		escolhido = Lista[rand() %5];
-		if(anterior != escolhido){
-			printf("%c%c ",escolhido,Modificadores[rand() %3]);
+		num = rand() %6;
+		if(anterior != (escolhido = lista[num]) && (anterior != lista[num-3] || anterior != lista[num+3])) { 
+			printf("%c%c ", escolhido, modificadores[rand() %3]);
 			x++;
 		}
 	}
-	//temporiza a solucao em segundos(NOTA: adicionar milisegundos)
-	printf("\naperte enter para comecar");
+
+	/* interage com o usuario e temporiza a solucao em segundos */
 	getchar();
 	start = time(NULL);
-	printf("aperte enter para parar");
+	printf("aperte qualque tecla para parar");
 	getchar();
 	stop = time(NULL);
-	printf("tempo: %.0f segundos\n", ((double)(stop - start)));
+	printf("%.0fs\n", ((double)stop - start));
 }
 
